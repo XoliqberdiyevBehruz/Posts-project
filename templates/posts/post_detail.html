@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load hitcount_tags %}
+{% block title %}{{post.title}}{% endblock %}
+
+{% block content %}
+
+<h3>{{post.title}}</h3>
+<p>Hit Count: {% get_hit_count for post %}</p>
+<img src="{{post.photo.url}}" style="width: 300px; height: auto;">
+<p><b>{{post.author}}</b></p>
+<p>{{post.description}}</p>
+{% if post.comments.exists %}
+    <hr>
+    {% for comment in post.comments.all %}  
+    <p>
+        <b>{{comment.author}}</b>  <i>{{comment.created_at}}</i>
+        <p>{{comment.comment}}</p>
+    </p>
+    {% endfor %}
+{% endif %}
+
+<form method="post" action="">
+    {% csrf_token %}
+    {{comment_form.as_p}}
+    <button>Yuborish</button>
+</form>
+{% endblock %}

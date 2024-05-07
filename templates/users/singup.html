@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}SingUp Page{% endblock %}
+
+{% block content %}
+<h2>SingUp Page</h2>
+<form method="post">{% csrf_token %} 
+    {{singup_form.as_p}}
+    <button>SingUp</button>
+</form>
+{% endblock %}
